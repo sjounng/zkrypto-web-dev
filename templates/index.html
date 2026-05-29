@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ content.title }}</title>
+  <meta name="description" content="{{ content.description }}" />
+  <link rel="icon" type="image/png" href="{{ content.favicon_src }}" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="stylesheet" href="/static/variables.css" />
+  <link rel="stylesheet" href="/static/page.css?v=20260529-c" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+
+  <header class="site-header" data-header>
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="ZKRYPTO 홈페이지">
+        <img class="brand-logo" src="{{ content.logo_src }}" alt="{{ content.logo_alt }}" width="300" height="56"
+          decoding="async" />
+      </a>
+
+      <nav class="desktop-nav" aria-label="주요 메뉴">
+        <a href="/products/zkporl">zkPoRL</a>
+        <a href="/products/zkwallet">zkWallet</a>
+        <a href="/products/zkvoting">zkVoting</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle btn-icon" type="button" aria-label="다크 모드로 전환" aria-pressed="false"
+          data-theme-toggle>
+          <span class="theme-toggle-icon" aria-hidden="true"></span>
+          <span class="visually-hidden" data-theme-label>다크 모드로 전환</span>
+        </button>
+        <a class="btn btn-action btn-small header-contact" href="#contact">
+          <span>Contact</span>
+          <span class="btn-arrow" aria-hidden="true"></span>
+        </a>
+        <button class="menu-button" type="button" aria-label="모바일 메뉴 열기" aria-expanded="false" data-menu-button>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" aria-label="모바일 주요 메뉴" hidden data-mobile-menu>
+      <a href="/products/zkporl">zkPoRL</a>
+      <a href="/products/zkwallet">zkWallet</a>
+      <a href="/products/zkvoting">zkVoting</a>
+      <a class="mobile-cta" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero photo-hero" id="top" aria-labelledby="hero-title" data-hero>
+      <div class="hero-bg" aria-hidden="true" data-hero-bg></div>
+      <div class="hero-scrim" aria-hidden="true"></div>
+      <div class="container hero-content" data-reveal>
+        <h1 id="hero-title">{{ content.hero.title }}</h1>
+        <p class="hero-sublead">{{ content.hero.sublead }}</p>
+        <p class="lead">{{ content.hero.lead }}</p>
+        <div class="hero-cta" aria-label="주요 행동">
+          <a class="btn btn-primary" href="{{ content.hero.primary_cta.href }}">{{ content.hero.primary_cta.label }}</a>
+          <a class="btn btn-ghost" href="{{ content.hero.secondary_cta.href }}">{{ content.hero.secondary_cta.label
+            }}</a>
+        </div>
+        {% if content.hero.proof_label != "" %}
+        <div class="hero-proof-row" aria-label="핵심 원칙">
+          <span>{{ content.hero.proof_label }}</span>
+        </div>
+        {% endif %}
+      </div>
+    </section>
+
+    <section class="ecosystem-section" id="ecosystem" aria-labelledby="ecosystem-title"
+      data-ecosystem-marquee>
+      <div class="container ecosystem-header">
+        <div>
+          <p class="eyebrow">{{ content.ecosystem.eyebrow }}</p>
+          <h2 id="ecosystem-title">{{ content.ecosystem.title }}</h2>
+          <p>{{ content.ecosystem.lead }}</p>
+        </div>
+      </div>
+
+      <div class="ecosystem-marquee" tabindex="0" aria-label="협업 및 신뢰 네트워크 로고 흐름">
+        <div class="ecosystem-track">
+          <div class="ecosystem-group">
+            {% for item in content.ecosystem.items %}
+            <div class="ecosystem-card">
+              <span class="ecosystem-logo-frame">
+                <img src="{{ item.logo_value() }}" alt="협력사 로고" width="300" height="56" loading="lazy"
+                  decoding="async" />
+              </span>
+            </div>
+            {% endfor %}
+          </div>
+
+          <div class="ecosystem-group" aria-hidden="true">
+            {% for item in content.ecosystem.items %}
+            <div class="ecosystem-card">
+              <span class="ecosystem-logo-frame">
+                <img src="{{ item.logo_value() }}" alt="" width="300" height="56" loading="lazy" decoding="async" />
+              </span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section standard-section" id="standard" aria-labelledby="standard-title">
+      <div class="container standard-panel" data-reveal>
+        <div class="section-copy" data-stagger>
+          <p class="eyebrow">{{ content.standard.eyebrow }}</p>
+          <h2 id="standard-title">{{ content.standard.title }}</h2>
+          <p>{{ content.standard.body }}</p>
+        </div>
+        <div class="standard-source" data-stagger aria-label="ISO 원문 출처">
+          <span>{{ content.standard.source_label }}</span>
+          <strong class="source-standard">{{ content.standard.source_standard }}</strong>
+          <p class="source-main-title">{{ content.standard.source_main_title }}</p>
+          <p class="source-subtitle">
+            {{ content.standard.source_subtitle_prefix }}
+            <span class="source-highlight">{{ content.standard.source_subtitle_highlight }}</span>
+          </p>
+          <a href="{{ content.standard.source_url }}" target="_blank" rel="noreferrer">{{
+            content.standard.source_link_label }}</a>
+        </div>
+        <figure class="standard-visual" data-stagger>
+          <img src="{{ content.standard.image_src }}" alt="{{ content.standard.image_alt }}" width="1659" height="948"
+            loading="lazy" decoding="async" />
+        </figure>
+      </div>
+    </section>
+
+    <section class="section usecase-section" id="use-cases" aria-labelledby="usecase-title">
+      <div class="container usecase-stage">
+        <div class="section-copy sticky-copy" data-reveal>
+          <p class="eyebrow">Use Cases</p>
+          <h2 id="usecase-title">공개하기 어려운 민감정보를 검증 받아야 하는 분야</h2>
+          <p>ZKP는 신원, 자격, 금융, 공공, AI 분야처럼 공개적으로 확인은 해야 하지만 원본은 공개하기가 어려운 딜레마를 해결합니다.</p>
+        </div>
+        <div class="usecase-orbit" aria-label="영지식증명 적용 분야" data-reveal>
+          <div class="orbit-core">
+            <span>ZKP</span>
+            <p>Zero-Knowledge Proof</p>
+          </div>
+          {% for item in content.use_cases %}
+          <article class="orbit-item {{ item.class_name }} {{ item.tone_class }}" data-stagger>
+            <span class="orbit-glyph" aria-hidden="true">
+              {% if item.icon == "audit" %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4.5 5.5v6c0 4.5 3 8 7.5 10 4.5-2 7.5-5.5 7.5-10v-6Z"/><path d="m8.5 11.5 2.5 2.5 4.5-5"/></svg>
+              {% else if item.icon == "vote" %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="3.5"/><path d="m8 12 3 3 5-6"/></svg>
+              {% else if item.icon == "id" %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><circle cx="8" cy="11" r="2"/><path d="M5 16c0-1.7 1.3-3 3-3s3 1.3 3 3"/><path d="M13.5 10h5M13.5 13.5h5"/></svg>
+              {% else if item.icon == "age" %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="6"/><path d="m9 13.5-2 7 5-3 5 3-2-7"/><path d="m9.4 9 1.8 1.8 3.4-3.6"/></svg>
+              {% else if item.icon == "lottery" %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h13A1.5 1.5 0 0 1 20 8.5v1.7a2 2 0 0 0 0 3.6v1.7A1.5 1.5 0 0 1 18.5 17h-13A1.5 1.5 0 0 1 4 15.5v-1.7a2 2 0 0 0 0-3.6Z"/><path d="M13.5 7.5v9" stroke-dasharray="2 2"/></svg>
+              {% else if item.icon == "cbdc" %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5 12 4.5l8.5 5"/><path d="M5.5 10v7M9.5 10v7M14.5 10v7M18.5 10v7"/><path d="M4 20h16"/></svg>
+              {% endif %}
+            </span>
+            <strong>{{ item.title }}</strong>
+            <span>{{ item.detail }}</span>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="section product-section" id="products" aria-labelledby="products-title">
+      <div class="container section-heading" data-reveal>
+        <p class="eyebrow">{{ content.product_gateway.eyebrow }}</p>
+        <h2 id="products-title">{{ content.product_gateway.title }}</h2>
+      </div>
+
+      <div class="container product-carousel" id="product-cards" aria-label="제품 슬라이드" data-reveal data-carousel>
+        <div class="carousel-viewport">
+          <div class="carousel-track" data-carousel-track>
+            {% for item in content.product_gateway.cards %}
+            <a class="product-slide-card {{ item.tone_class }}" href="{{ item.href }}"
+              aria-label="{{ item.name }} {{ item.cta_label }}" {% if item.external %} target="_blank" rel="noreferrer" {% endif %}>
+              <img src="{{ item.image_src }}" alt="{{ item.image_alt }}" width="1600" height="900" loading="lazy"
+                decoding="async" />
+              <span class="orbit-card-name">{{ item.name }}</span>
+              <span class="product-slide-caption"><em>Click</em></span>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="carousel-footer">
+          <button class="carousel-prev" type="button" aria-label="이전 제품" data-carousel-prev>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="carousel-dots" data-carousel-dots></div>
+          <button class="carousel-next" type="button" aria-label="다음 제품" data-carousel-next>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section proof-section" id="proof" aria-labelledby="proof-title">
+      <div class="container proof-layout">
+        <div class="proof-story" data-reveal>
+          <p class="eyebrow">{{ content.trust_proof.eyebrow }}</p>
+          <h2 id="proof-title">{{ content.trust_proof.headline }}</h2>
+          <p>{{ content.trust_proof.lead }}</p>
+
+          <div class="proof-timeline" aria-label="지크립토 신뢰 흐름">
+            {% for item in content.trust_proof.milestones %}
+            <article data-stagger>
+              <span>{{ item.phase }}</span>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.body }}</p>
+            </article>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="proof-card-grid" data-reveal>
+          {% for item in content.trust_proof.proof_items %}
+          <article class="proof-card {{ item.tone_class }}" data-stagger>
+            <span class="proof-label">{{ item.label }}</span>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.detail }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" id="contact" aria-labelledby="cta-title" data-reveal>
+      <div class="container cta-layout">
+        <div>
+          <p class="eyebrow">{{ content.final_cta.eyebrow }}</p>
+          <h2 id="cta-title">{{ content.final_cta.title }}</h2>
+          <p>{{ content.final_cta.body }}</p>
+          <div class="cta-actions" aria-label="다음 행동">
+            <a class="btn btn-action" href="{{ content.final_cta.primary.href }}">
+              <span>{{ content.final_cta.primary.label }}</span>
+              <span class="btn-arrow" aria-hidden="true"></span>
+            </a>
+            <a class="btn btn-ghost" href="{{ content.final_cta.secondary.href }}">{{ content.final_cta.secondary.label
+              }}</a>
+            <a class="cta-text-link" href="{{ content.final_cta.tertiary.href }}">{{ content.final_cta.tertiary.label
+              }}</a>
+          </div>
+        </div>
+        <form class="contact-form" action="/contact#contact" method="post" aria-label="Contact form">
+          <label>
+            <span>이메일</span>
+            <input type="email" name="email" placeholder="name@company.com" autocomplete="email"
+              value="{{ contact.email }}" required />
+          </label>
+          <label>
+            <span>문의 내용</span>
+            <textarea name="message" rows="5" placeholder="적용 분야, 검증하려는 업무, 상담 희망 내용을 남겨주세요."
+              required>{{ contact.message }}</textarea>
+          </label>
+          <label class="consent-field">
+            <input type="checkbox" name="privacy" value="yes" required{% if contact.privacy_checked %} checked{% endif
+              %} />
+            <span>답변을 위한 개인정보 수집·이용에 동의합니다.</span>
+          </label>
+          <button class="btn btn-action" type="submit">
+            <span>문의하기</span>
+            <span class="btn-arrow" aria-hidden="true"></span>
+          </button>
+          {% if contact.show_feedback %}
+          <p class="form-note {{ contact.feedback_class }}">{{ contact.feedback_message }}</p>
+          {% else %}
+          <p class="form-note">{{ contact.feedback_message }}</p>
+          {% endif %}
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-intro">
+        <a class="brand footer-brand" href="#top" aria-label="ZKRYPTO 홈페이지 상단으로 이동">
+          <img class="brand-logo" src="{{ content.logo_src }}" alt="{{ content.logo_alt }}" width="300" height="56"
+            loading="lazy" decoding="async" />
+        </a>
+        <p>{{ content.footer_text }}</p>
+        <p class="footer-note">{{ content.footer_note }}</p>
+      </div>
+      <div class="footer-links" aria-label="푸터 메뉴">
+        {% for column in content.footer_columns %}
+        <nav aria-label="{{ column.title }}">
+          <strong>{{ column.title }}</strong>
+          {% for item in column.links %}
+          <a href="{{ item.href }}">{{ item.label }}</a>
+          {% endfor %}
+        </nav>
+        {% endfor %}
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/script.js?v=20260528-o"></script>
+</body>
+
+</html>

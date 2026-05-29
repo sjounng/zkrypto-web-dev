@@ -1,0 +1,156 @@
+{% extends "product_base.html" %}
+
+{% block content %}
+    <section class="product-landing-hero" id="top" aria-labelledby="product-title" data-reveal>
+      <div class="container product-hero-grid">
+        <div class="product-hero-copy">
+          <p class="eyebrow">{{ product.eyebrow }}</p>
+          <span class="product-name">{{ product.product_name }}</span>
+          <h1 id="product-title">{{ product.hero_title }}</h1>
+          <p class="product-lead">{{ product.hero_lead }}</p>
+          <p class="product-audience">Verifiable Private Voting</p>
+          <p class="product-note">{{ product.hero_note }}</p>
+          <ul class="product-signal-list" aria-label="{{ product.product_name }} 핵심 정보">
+            {% for item in product.stats %}
+            <li>
+              <span>{{ item.label }}</span>
+              <strong>{{ item.value }}</strong>
+              <small>{{ item.detail }}</small>
+            </li>
+            {% endfor %}
+          </ul>
+          <div class="hero-cta" aria-label="제품 행동">
+            <a class="btn btn-primary" href="{{ product.primary_cta.href }}">{{ product.primary_cta.label }}</a>
+            <a class="btn btn-ghost" href="{{ product.secondary_cta.href }}">{{ product.secondary_cta.label }}</a>
+          </div>
+        </div>
+
+        <div class="product-hero-visual" aria-label="{{ product.product_name }} 주요 지표">
+          <figure class="product-visual-card">
+            <img src="/assets/zkvoting-product-slide-1.png" alt="zkVoting 제품 소개 비주얼" width="1600" height="900"
+              decoding="async" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section product-detail-section" aria-labelledby="problem-title">
+      <div class="container split-heading" data-reveal>
+        <div>
+          <p class="eyebrow">Why zkVoting?</p>
+          <h2 id="problem-title">{{ product.problem_title }}</h2>
+        </div>
+        <p>{{ product.problem_body }}</p>
+      </div>
+      <div class="container detail-card-grid" data-reveal>
+        {% for item in product.problems %}
+        <article>
+          <span>Problem</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.body }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="section product-answer-section" aria-labelledby="answer-title">
+      <div class="container product-answer-panel" data-reveal>
+        <div class="section-copy">
+          <p class="eyebrow">제품이 하는 일</p>
+          <h2 id="answer-title">{{ product.answer_title }}</h2>
+          <p>{{ product.answer_body }}</p>
+        </div>
+        <div class="product-answer-content">
+          <figure class="product-context-media">
+            <img src="/assets/zkvoting-product-slide-2.png" alt="zkVoting 검증 흐름 이미지" width="2880" height="1620"
+              loading="lazy" decoding="async" />
+          </figure>
+          <div class="answer-card-grid">
+            {% for item in product.answer_cards %}
+            <article>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.body }}</p>
+            </article>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section product-flow-section" aria-labelledby="workflow-title">
+      <div class="container section-heading" data-reveal>
+        <p class="eyebrow">업무 흐름</p>
+        <h2 id="workflow-title">{{ product.workflow_title }}</h2>
+        <p>{{ product.workflow_body }}</p>
+      </div>
+      <div class="container product-flow-rail" data-reveal>
+        {% for item in product.workflow %}
+        <article>
+          <span>{{ item.number }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.body }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="section product-ops-section" aria-labelledby="operations-title">
+      <div class="container split-heading" data-reveal>
+        <div>
+          <p class="eyebrow">데모 확인 방식</p>
+          <h2 id="operations-title">{{ product.operations_title }}</h2>
+        </div>
+        <p>{{ product.operations_body }}</p>
+      </div>
+      <div class="container detail-card-grid operations-grid" data-reveal>
+        {% for item in product.operations %}
+        <article>
+          <span>미팅 데모</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.body }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="section product-proof-section" aria-labelledby="proof-title">
+      <div class="container product-proof-layout" data-reveal>
+        <div class="section-copy sticky-copy">
+          <p class="eyebrow">확인 자료</p>
+          <h2 id="proof-title">{{ product.proof_title }}</h2>
+          <p>{{ product.proof_body }}</p>
+        </div>
+        <div class="proof-list">
+          {% for item in product.proof_points %}
+          <article>
+            <strong>{{ item.title }}</strong>
+            <p>{{ item.body }}</p>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta product-final-cta" id="contact" aria-labelledby="product-cta-title" data-reveal>
+      <div class="container cta-layout product-cta-layout">
+        <div>
+          <p class="eyebrow">다음 단계</p>
+          <h2 id="product-cta-title">{{ product.cta_title }}</h2>
+          <p>{{ product.cta_body }}</p>
+          <div class="cta-actions" aria-label="다음 행동">
+            <a class="btn btn-action" href="{{ product.primary_cta.href }}">
+              <span>{{ product.primary_cta.label }}</span>
+              <span class="btn-arrow" aria-hidden="true"></span>
+            </a>
+            <a class="btn btn-ghost" href="{{ product.secondary_cta.href }}">{{ product.secondary_cta.label }}</a>
+          </div>
+        </div>
+        <div class="product-related-card">
+          <span>함께 검토할 제품</span>
+          <h3>zkPoRL</h3>
+          <p>고객부채 상시 대사와 준비자산 검증 로드맵도 함께 검토할 수 있습니다.</p>
+          <a href="/products/zkporl">zkPoRL 보기</a>
+        </div>
+      </div>
+    </section>
+{% endblock %}

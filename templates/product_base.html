@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko" data-theme="light">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}{{ product.title }}{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ product.description }}{% endblock %}" />
+  <link rel="icon" type="image/png" href="{{ content.favicon_src }}" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="stylesheet" href="/static/variables.css" />
+  <link rel="stylesheet" href="/static/page.css?v=20260529-e" />
+</head>
+
+<body class="product-page {{ product.theme_class }}">
+  <a class="skip-link" href="#main">본문으로 바로가기</a>
+
+  <header class="site-header product-site-header is-scrolled" data-header data-solid-header>
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="ZKRYPTO 홈페이지">
+        <img class="brand-logo" src="{{ content.logo_src }}" alt="{{ content.logo_alt }}" width="300" height="56"
+          decoding="async" />
+      </a>
+
+      <nav class="desktop-nav" aria-label="주요 메뉴">
+        <a href="/products/zkporl">zkPoRL</a>
+        <a href="/products/zkwallet">zkWallet</a>
+        <a href="/products/zkvoting">zkVoting</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle btn-icon" type="button" aria-label="다크 모드로 전환" aria-pressed="false"
+          data-theme-toggle>
+          <span class="theme-toggle-icon" aria-hidden="true"></span>
+          <span class="visually-hidden" data-theme-label>다크 모드로 전환</span>
+        </button>
+        <a class="btn btn-action btn-small header-contact" href="/#contact">
+          <span>Contact</span>
+          <span class="btn-arrow" aria-hidden="true"></span>
+        </a>
+        <button class="menu-button" type="button" aria-label="모바일 메뉴 열기" aria-expanded="false" data-menu-button>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="mobile-nav" aria-label="모바일 주요 메뉴" hidden data-mobile-menu>
+      <a href="/products/zkporl">zkPoRL</a>
+      <a href="/products/zkwallet">zkWallet</a>
+      <a href="/products/zkvoting">zkVoting</a>
+      <a class="mobile-cta" href="/#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-intro">
+        <a class="brand footer-brand" href="/" aria-label="ZKRYPTO 홈페이지로 이동">
+          <img class="brand-logo" src="{{ content.logo_src }}" alt="{{ content.logo_alt }}" width="300" height="56"
+            loading="lazy" decoding="async" />
+        </a>
+        <p>{{ content.footer_text }}</p>
+        <p class="footer-note">{{ content.footer_note }}</p>
+      </div>
+      <div class="footer-links" aria-label="푸터 메뉴">
+        {% for column in content.footer_columns %}
+        <nav aria-label="{{ column.title }}">
+          <strong>{{ column.title }}</strong>
+          {% for item in column.links %}
+          <a href="{{ item.href }}">{{ item.label }}</a>
+          {% endfor %}
+        </nav>
+        {% endfor %}
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/script.js?v=20260528-o"></script>
+</body>
+
+</html>
