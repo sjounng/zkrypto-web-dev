@@ -80,18 +80,19 @@
               <circle cx="530" cy="200" r="190" fill="rgba(20,184,166,0.08)" stroke="rgba(20,184,166,0.4)" stroke-width="1.5"/>
               <circle cx="530" cy="200" r="190" fill="rgba(20,184,166,0.3)" clip-path="url(#venn-left-clip)"/>
 
-              <text x="210" y="185" text-anchor="middle" font-size="16" font-weight="700" fill="rgba(255,255,255,0.92)">투명성 요구</text>
-              <text x="210" y="210" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">감독·감사·이용자에게</text>
-              <text x="210" y="228" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">검증 가능한 결과를</text>
-              <text x="210" y="246" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">제공해야 함</text>
+              <text x="210" y="185" text-anchor="middle" font-size="16" font-weight="700" fill="rgba(255,255,255,0.92)">{{ product.venn_left_title|t(lang) }}</text>
+              <text x="210" y="210" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">{{ product.venn_left_desc1|t(lang) }}</text>
+              <text x="210" y="228" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">{{ product.venn_left_desc2|t(lang) }}</text>
+              <text x="210" y="246" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">{{ product.venn_left_desc3|t(lang) }}</text>
 
               <text x="400" y="190" text-anchor="middle" font-size="21" font-weight="700" fill="#5eead4">zkPoRL</text>
-              <text x="400" y="215" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.7)">ZKP 기반 검증</text>
+              <text x="400" y="212" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.7)">{{ product.venn_center_desc|t(lang) }}</text>
+              {% if product.venn_center_desc2|t(lang) != "" %}<text x="400" y="228" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.7)">{{ product.venn_center_desc2|t(lang) }}</text>{% endif %}
 
-              <text x="590" y="185" text-anchor="middle" font-size="16" font-weight="700" fill="rgba(255,255,255,0.92)">정보보호 요구</text>
-              <text x="590" y="210" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">고객 잔고·거래내역·</text>
-              <text x="590" y="228" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">지갑주소는 외부에</text>
-              <text x="590" y="246" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">노출하기 어려움</text>
+              <text x="590" y="185" text-anchor="middle" font-size="16" font-weight="700" fill="rgba(255,255,255,0.92)">{{ product.venn_right_title|t(lang) }}</text>
+              <text x="590" y="210" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">{{ product.venn_right_desc1|t(lang) }}</text>
+              <text x="590" y="228" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">{{ product.venn_right_desc2|t(lang) }}</text>
+              <text x="590" y="246" text-anchor="middle" font-size="12.5" fill="rgba(255,255,255,0.55)">{{ product.venn_right_desc3|t(lang) }}</text>
             </svg>
           </div>
           <table class="zkp-compare-table">

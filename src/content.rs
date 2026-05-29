@@ -217,7 +217,18 @@ pub struct ProductLanding {
     pub related_body: LocalizedStr,
     pub related_href: &'static str,
     pub related_link_label: LocalizedStr,
-    // zkPoRL specific
+    // zkPoRL venn diagram
+    pub venn_left_title: LocalizedStr,
+    pub venn_left_desc1: LocalizedStr,
+    pub venn_left_desc2: LocalizedStr,
+    pub venn_left_desc3: LocalizedStr,
+    pub venn_center_desc: LocalizedStr,
+    pub venn_center_desc2: LocalizedStr,
+    pub venn_right_title: LocalizedStr,
+    pub venn_right_desc1: LocalizedStr,
+    pub venn_right_desc2: LocalizedStr,
+    pub venn_right_desc3: LocalizedStr,
+    // zkPoRL flow
     pub flow_section_title: LocalizedStr,
     pub flow_subtitle: LocalizedStr,
     pub flow_in1_title: LocalizedStr,
@@ -759,7 +770,18 @@ fn zkporl_landing() -> ProductLanding {
         ),
         related_href: "/products/zkwallet",
         related_link_label: ls!("zkWallet 보기", "View zkWallet"),
-        // zkPoRL specific
+        // zkPoRL venn diagram
+        venn_left_title: ls!("투명성 요구", "Transparency"),
+        venn_left_desc1: ls!("감독·감사·이용자에게", "To regulators, auditors,"),
+        venn_left_desc2: ls!("검증 가능한 결과를", "and users — verifiable"),
+        venn_left_desc3: ls!("제공해야 함", "results are required"),
+        venn_center_desc: ls!("ZKP 기반 검증", "ZKP-based"),
+        venn_center_desc2: ls!("", "verification"),
+        venn_right_title: ls!("정보보호 요구", "Privacy"),
+        venn_right_desc1: ls!("고객 잔고·거래내역·", "Customer balances,"),
+        venn_right_desc2: ls!("지갑주소는 외부에", "transactions, and wallet"),
+        venn_right_desc3: ls!("노출하기 어려움", "addresses cannot be exposed"),
+        // zkPoRL flow
         flow_section_title: ls!("zkPoRL Server 처리 흐름", "zkPoRL Server Processing Flow"),
         flow_subtitle: ls!(
             "장부·지갑·온체인·감사증빙을 하나의 검증 흐름으로 연결합니다.",
@@ -983,6 +1005,17 @@ fn zkwallet_landing() -> ProductLanding {
             "거래 서명 요청은 정책 검증 후에만 진행되며, 키 원본을 모으지 않고 부분 서명의 결합으로 완성됩니다.",
             "Transaction signing requests proceed only after policy verification, and are completed by combining partial signatures — never by reconstructing the original key."
         ),
+        // zkPoRL venn (unused in zkWallet)
+        venn_left_title: ls!("", ""),
+        venn_left_desc1: ls!("", ""),
+        venn_left_desc2: ls!("", ""),
+        venn_left_desc3: ls!("", ""),
+        venn_center_desc: ls!("", ""),
+        venn_center_desc2: ls!("", ""),
+        venn_right_title: ls!("", ""),
+        venn_right_desc1: ls!("", ""),
+        venn_right_desc2: ls!("", ""),
+        venn_right_desc3: ls!("", ""),
         // zkPoRL specific (unused in zkWallet)
         flow_section_title: ls!("", ""),
         flow_subtitle: ls!("", ""),
@@ -1140,6 +1173,17 @@ fn zkvoting_landing() -> ProductLanding {
         ),
         related_href: "/products/zkporl",
         related_link_label: ls!("zkPoRL 보기", "View zkPoRL"),
+        // zkPoRL venn (unused in zkVoting)
+        venn_left_title: ls!("", ""),
+        venn_left_desc1: ls!("", ""),
+        venn_left_desc2: ls!("", ""),
+        venn_left_desc3: ls!("", ""),
+        venn_center_desc: ls!("", ""),
+        venn_center_desc2: ls!("", ""),
+        venn_right_title: ls!("", ""),
+        venn_right_desc1: ls!("", ""),
+        venn_right_desc2: ls!("", ""),
+        venn_right_desc3: ls!("", ""),
         // zkPoRL / zkWallet specific (unused in zkVoting)
         mpc_asis_title: ls!("", ""),
         mpc_asis_item1: ls!("", ""),
