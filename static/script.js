@@ -4,11 +4,19 @@ const menuButton = document.querySelector('[data-menu-button]');
 const mobileMenu = document.querySelector('[data-mobile-menu]');
 const themeToggle = document.querySelector('[data-theme-toggle]');
 const themeLabel = document.querySelector('[data-theme-label]');
+const langPickers = Array.from(document.querySelectorAll('[data-lang-picker]'));
+const mobileLangRows = Array.from(document.querySelectorAll('[data-mobile-lang-row]'));
 const revealItems = Array.from(document.querySelectorAll('[data-reveal]'));
 const heroBg = document.querySelector('[data-hero-bg]');
 const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 const themeStorageKey = 'zkrypto-theme';
+const languageStorageKey = 'zkrypto-language';
 const isProductPage = document.body.classList.contains('product-page');
+
+const LANGUAGES = [
+  { code: 'ko', label: '한국어', short: 'KO' },
+  { code: 'en', label: 'English', short: 'EN' },
+];
 
 function getSystemTheme() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -19,6 +27,11 @@ function getStoredTheme() {
   return stored === 'dark' || stored === 'light' ? stored : null;
 }
 
+function getStoredLanguage() {
+  const stored = window.localStorage.getItem(languageStorageKey);
+  return LANGUAGES.some((l) => l.code === stored) ? stored : null;
+}
+
 function applyTheme(theme, persist = false) {
   root.dataset.theme = theme;
   if (themeToggle) themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
@@ -27,6 +40,54 @@ function applyTheme(theme, persist = false) {
   }
   if (themeLabel) themeLabel.textContent = theme === 'dark' ? '라이트 모드로 전환' : '다크 모드로 전환';
   if (persist) window.localStorage.setItem(themeStorageKey, theme);
+}
+
+function applyLanguage(code, persist = false) {
+  root.lang = code;
+  root.dataset.language = code;
+  const lang = LANGUAGES.find((l) => l.code === code);
+
+  langPickers.forEach((picker) => {
+    const current = picker.querySelector('[data-lang-current]');
+    const btn = picker.querySelector('[data-lang-btn]');
+    if (current && lang) current.textContent = lang.short;
+    if (btn && lang) btn.setAttribute('aria-label', `언어 선택 (현재: ${lang.label})`);
+    picker.querySelectorAll('[data-lang-option]').forEach((opt) => {
+      opt.setAttribute('aria-selected', String(opt.dataset.langOption === code));
+    });
+  });
+
+  mobileLangRows.forEach((row) => {
+    row.querySelectorAll('[data-lang-option]').forEach((btn) => {
+      btn.setAttribute('aria-pressed', String(btn.dataset.langOption === code));
+    });
+  });
+
+  if (persist) {
+    document.cookie = `${languageStorageKey}=${code};path=/;max-age=31536000;SameSite=Lax`;
+    window.localStorage.setItem(languageStorageKey, code);
+    window.location.reload();
+  }
+}
+
+function openLangPicker(picker) {
+  const btn = picker.querySelector('[data-lang-btn]');
+  const menu = picker.querySelector('[data-lang-menu]');
+  if (!btn || !menu) return;
+  btn.setAttribute('aria-expanded', 'true');
+  menu.hidden = false;
+}
+
+function closeLangPicker(picker) {
+  const btn = picker.querySelector('[data-lang-btn]');
+  const menu = picker.querySelector('[data-lang-menu]');
+  if (!btn || !menu) return;
+  btn.setAttribute('aria-expanded', 'false');
+  menu.hidden = true;
+}
+
+function closeAllLangPickers() {
+  langPickers.forEach(closeLangPicker);
 }
 
 function updateHeader() {
@@ -100,6 +161,7 @@ function updateScrollProgress() {
 }
 
 applyTheme(getStoredTheme() || (isProductPage ? 'light' : getSystemTheme()));
+applyLanguage(getStoredLanguage() || 'ko');
 setupReveal();
 updateHeader();
 updateHeroParallax();
@@ -129,6 +191,42 @@ if (themeToggle) {
     applyTheme(nextTheme, true);
   });
 }
+
+langPickers.forEach((picker) => {
+  const btn = picker.querySelector('[data-lang-btn]');
+  const menu = picker.querySelector('[data-lang-menu]');
+
+  if (btn) {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = btn.getAttribute('aria-expanded') === 'true';
+      closeAllLangPickers();
+      if (!isOpen) openLangPicker(picker);
+    });
+  }
+
+  if (menu) {
+    menu.querySelectorAll('[data-lang-option]').forEach((opt) => {
+      opt.addEventListener('click', () => {
+        applyLanguage(opt.dataset.langOption, true);
+        closeLangPicker(picker);
+      });
+    });
+  }
+});
+
+mobileLangRows.forEach((row) => {
+  row.querySelectorAll('[data-lang-option]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      applyLanguage(btn.dataset.langOption, true);
+    });
+  });
+});
+
+document.addEventListener('click', closeAllLangPickers);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeAllLangPickers();
+});
 
 if (menuButton && mobileMenu) {
   menuButton.addEventListener('click', () => {

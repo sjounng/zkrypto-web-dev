@@ -3,7 +3,7 @@ mod content;
 use askama::Template;
 use axum::{
     extract::Form,
-    http::StatusCode,
+    http::{HeaderMap, StatusCode},
     response::Html,
     routing::{get, post},
     Router,
@@ -13,11 +13,20 @@ use serde::Deserialize;
 use std::net::SocketAddr;
 use tower_http::services::ServeDir;
 
+mod filters {
+    use crate::content::LocalizedStr;
+
+    pub fn t(s: &LocalizedStr, lang: &&str) -> askama::Result<&'static str> {
+        Ok(s.get(lang))
+    }
+}
+
 #[derive(Template)]
 #[template(path = "index.html")]
 struct HomeTemplate<'a> {
     content: &'a SiteContent,
     contact: ContactView,
+    lang: &'a str,
 }
 
 #[derive(Template)]
@@ -25,6 +34,7 @@ struct HomeTemplate<'a> {
 struct ZkporlTemplate<'a> {
     content: &'a SiteContent,
     product: &'a ProductLanding,
+    lang: &'a str,
 }
 
 #[derive(Template)]
@@ -32,6 +42,7 @@ struct ZkporlTemplate<'a> {
 struct ZkwalletTemplate<'a> {
     content: &'a SiteContent,
     product: &'a ProductLanding,
+    lang: &'a str,
 }
 
 #[derive(Template)]
@@ -39,6 +50,7 @@ struct ZkwalletTemplate<'a> {
 struct ZkvotingTemplate<'a> {
     content: &'a SiteContent,
     product: &'a ProductLanding,
+    lang: &'a str,
 }
 
 #[derive(Debug, Deserialize)]
@@ -66,9 +78,25 @@ impl Default for ContactView {
             privacy_checked: false,
             show_feedback: false,
             feedback_class: "",
-            feedback_message: "실제 접수 이메일 또는 CRM 연동은 배포 전 연결 필요".to_string(),
+            feedback_message: String::new(),
         }
     }
+}
+
+fn extract_lang(headers: &HeaderMap) -> &'static str {
+    headers
+        .get("cookie")
+        .and_then(|v| v.to_str().ok())
+        .and_then(|cookies| {
+            cookies
+                .split(';')
+                .find(|c| c.trim().starts_with("zkrypto-language="))
+                .and_then(|c| c.split('=').nth(1))
+                .map(|v| v.trim())
+        })
+        .filter(|v| *v == "en")
+        .map(|_| "en")
+        .unwrap_or("ko")
 }
 
 #[tokio::main]
@@ -96,38 +124,46 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-async fn home() -> Result<Html<String>, StatusCode> {
-    render_home(ContactView::default())
+async fn home(headers: HeaderMap) -> Result<Html<String>, StatusCode> {
+    let lang = extract_lang(&headers);
+    render_home(ContactView::default(), lang)
 }
 
-async fn contact(Form(form): Form<ContactForm>) -> Result<Html<String>, StatusCode> {
-    render_home(validate_contact(form))
+async fn contact(headers: HeaderMap, Form(form): Form<ContactForm>) -> Result<Html<String>, StatusCode> {
+    let lang = extract_lang(&headers);
+    render_home(validate_contact(form), lang)
 }
 
-async fn product_zkporl() -> Result<Html<String>, StatusCode> {
+async fn product_zkporl(headers: HeaderMap) -> Result<Html<String>, StatusCode> {
+    let lang = extract_lang(&headers);
     let content = site_content();
     let product = product_landing("zkporl").ok_or(StatusCode::NOT_FOUND)?;
     render_template(ZkporlTemplate {
         content: &content,
         product: &product,
+        lang,
     })
 }
 
-async fn product_zkwallet() -> Result<Html<String>, StatusCode> {
+async fn product_zkwallet(headers: HeaderMap) -> Result<Html<String>, StatusCode> {
+    let lang = extract_lang(&headers);
     let content = site_content();
     let product = product_landing("zkwallet").ok_or(StatusCode::NOT_FOUND)?;
     render_template(ZkwalletTemplate {
         content: &content,
         product: &product,
+        lang,
     })
 }
 
-async fn product_zkvoting() -> Result<Html<String>, StatusCode> {
+async fn product_zkvoting(headers: HeaderMap) -> Result<Html<String>, StatusCode> {
+    let lang = extract_lang(&headers);
     let content = site_content();
     let product = product_landing("zkvoting").ok_or(StatusCode::NOT_FOUND)?;
     render_template(ZkvotingTemplate {
         content: &content,
         product: &product,
+        lang,
     })
 }
 
@@ -135,11 +171,12 @@ async fn healthz() -> &'static str {
     "ok"
 }
 
-fn render_home(contact: ContactView) -> Result<Html<String>, StatusCode> {
+fn render_home(contact: ContactView, lang: &str) -> Result<Html<String>, StatusCode> {
     let content = site_content();
     HomeTemplate {
         content: &content,
         contact,
+        lang,
     }
     .render()
     .map(Html)

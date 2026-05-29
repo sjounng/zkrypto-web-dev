@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="ko" data-theme="light">
+<html lang="{{ lang }}" data-theme="light">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ content.title }}</title>
-  <meta name="description" content="{{ content.description }}" />
+  <title>{{ content.title|t(lang) }}</title>
+  <meta name="description" content="{{ content.description|t(lang) }}" />
   <link rel="icon" type="image/png" href="{{ content.favicon_src }}" />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   <link rel="stylesheet" href="/static/variables.css" />
-  <link rel="stylesheet" href="/static/page.css?v=20260529-c" />
+  <link rel="stylesheet" href="/static/page.css?v=20260529-d" />
 </head>
 
 <body>
@@ -32,13 +32,29 @@
       <div class="header-actions">
         <button class="theme-toggle btn-icon" type="button" aria-label="다크 모드로 전환" aria-pressed="false"
           data-theme-toggle>
-          <span class="theme-toggle-icon" aria-hidden="true"></span>
+          <span class="theme-toggle-icon" aria-hidden="true">
+            <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none">
+              <path d="M20.2 14.1A7.6 7.6 0 0 1 9.9 3.8 8.6 8.6 0 1 0 20.2 14.1Z" />
+            </svg>
+            <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="3.8" />
+              <path d="M12 2.8v2.3M12 18.9v2.3M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2.8 12h2.3M18.9 12h2.3M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6" />
+            </svg>
+          </span>
           <span class="visually-hidden" data-theme-label>다크 모드로 전환</span>
         </button>
-        <a class="btn btn-action btn-small header-contact" href="#contact">
-          <span>Contact</span>
-          <span class="btn-arrow" aria-hidden="true"></span>
-        </a>
+        <div class="lang-picker" data-lang-picker>
+          <button class="lang-picker-btn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="언어 선택" data-lang-btn>
+            <span data-lang-current>KO</span>
+            <svg class="lang-caret" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+              <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="lang-picker-menu" role="listbox" aria-label="언어 선택" hidden data-lang-menu>
+            <li class="lang-option" role="option" aria-selected="true" data-lang-option="ko">한국어</li>
+            <li class="lang-option" role="option" aria-selected="false" data-lang-option="en">English</li>
+          </ul>
+        </div>
         <button class="menu-button" type="button" aria-label="모바일 메뉴 열기" aria-expanded="false" data-menu-button>
           <span></span>
           <span></span>
@@ -51,7 +67,10 @@
       <a href="/products/zkporl">zkPoRL</a>
       <a href="/products/zkwallet">zkWallet</a>
       <a href="/products/zkvoting">zkVoting</a>
-      <a class="mobile-cta" href="#contact">Contact</a>
+      <div class="mobile-lang-row" role="group" aria-label="언어 선택" data-mobile-lang-row>
+        <button class="mobile-lang-option" type="button" aria-pressed="true" data-lang-option="ko">한국어</button>
+        <button class="mobile-lang-option" type="button" aria-pressed="false" data-lang-option="en">English</button>
+      </div>
     </nav>
   </header>
 
@@ -60,13 +79,12 @@
       <div class="hero-bg" aria-hidden="true" data-hero-bg></div>
       <div class="hero-scrim" aria-hidden="true"></div>
       <div class="container hero-content" data-reveal>
-        <h1 id="hero-title">{{ content.hero.title }}</h1>
-        <p class="hero-sublead">{{ content.hero.sublead }}</p>
-        <p class="lead">{{ content.hero.lead }}</p>
+        <h1 id="hero-title">{{ content.hero.title|t(lang) }}</h1>
+        <p class="hero-sublead">{{ content.hero.sublead|t(lang) }}</p>
+        <p class="lead">{{ content.hero.lead|t(lang) }}</p>
         <div class="hero-cta" aria-label="주요 행동">
-          <a class="btn btn-primary" href="{{ content.hero.primary_cta.href }}">{{ content.hero.primary_cta.label }}</a>
-          <a class="btn btn-ghost" href="{{ content.hero.secondary_cta.href }}">{{ content.hero.secondary_cta.label
-            }}</a>
+          <a class="btn btn-primary" href="{{ content.hero.primary_cta.href }}">{{ content.hero.primary_cta.label|t(lang) }}</a>
+          <a class="btn btn-ghost" href="{{ content.hero.secondary_cta.href }}">{{ content.hero.secondary_cta.label|t(lang) }}</a>
         </div>
         {% if content.hero.proof_label != "" %}
         <div class="hero-proof-row" aria-label="핵심 원칙">
@@ -116,8 +134,8 @@
       <div class="container standard-panel" data-reveal>
         <div class="section-copy" data-stagger>
           <p class="eyebrow">{{ content.standard.eyebrow }}</p>
-          <h2 id="standard-title">{{ content.standard.title }}</h2>
-          <p>{{ content.standard.body }}</p>
+          <h2 id="standard-title">{{ content.standard.title|t(lang) }}</h2>
+          <p>{{ content.standard.body|t(lang) }}</p>
         </div>
         <div class="standard-source" data-stagger aria-label="ISO 원문 출처">
           <span>{{ content.standard.source_label }}</span>
@@ -128,10 +146,10 @@
             <span class="source-highlight">{{ content.standard.source_subtitle_highlight }}</span>
           </p>
           <a href="{{ content.standard.source_url }}" target="_blank" rel="noreferrer">{{
-            content.standard.source_link_label }}</a>
+            content.standard.source_link_label|t(lang) }}</a>
         </div>
         <figure class="standard-visual" data-stagger>
-          <img src="{{ content.standard.image_src }}" alt="{{ content.standard.image_alt }}" width="1659" height="948"
+          <img src="{{ content.standard.image_src }}" alt="{{ content.standard.image_alt|t(lang) }}" width="1659" height="948"
             loading="lazy" decoding="async" />
         </figure>
       </div>
@@ -141,8 +159,8 @@
       <div class="container usecase-stage">
         <div class="section-copy sticky-copy" data-reveal>
           <p class="eyebrow">Use Cases</p>
-          <h2 id="usecase-title">공개하기 어려운 민감정보를 검증 받아야 하는 분야</h2>
-          <p>ZKP는 신원, 자격, 금융, 공공, AI 분야처럼 공개적으로 확인은 해야 하지만 원본은 공개하기가 어려운 딜레마를 해결합니다.</p>
+          <h2 id="usecase-title">{{ content.use_cases_title|t(lang) }}</h2>
+          <p>{{ content.use_cases_lead|t(lang) }}</p>
         </div>
         <div class="usecase-orbit" aria-label="영지식증명 적용 분야" data-reveal>
           <div class="orbit-core">
@@ -160,8 +178,8 @@
               {% else if item.icon == "cbdc" %}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5 12 4.5l8.5 5"/><path d="M5.5 10v7M9.5 10v7M14.5 10v7M18.5 10v7"/><path d="M4 20h16"/></svg>
               {% endif %}
             </span>
-            <strong>{{ item.title }}</strong>
-            <span>{{ item.detail }}</span>
+            <strong>{{ item.title|t(lang) }}</strong>
+            <span>{{ item.detail|t(lang) }}</span>
           </article>
           {% endfor %}
         </div>
@@ -171,7 +189,7 @@
     <section class="section product-section" id="products" aria-labelledby="products-title">
       <div class="container section-heading" data-reveal>
         <p class="eyebrow">{{ content.product_gateway.eyebrow }}</p>
-        <h2 id="products-title">{{ content.product_gateway.title }}</h2>
+        <h2 id="products-title">{{ content.product_gateway.title|t(lang) }}</h2>
       </div>
 
       <div class="container product-carousel" id="product-cards" aria-label="제품 슬라이드" data-reveal data-carousel>
@@ -179,8 +197,8 @@
           <div class="carousel-track" data-carousel-track>
             {% for item in content.product_gateway.cards %}
             <a class="product-slide-card {{ item.tone_class }}" href="{{ item.href }}"
-              aria-label="{{ item.name }} {{ item.cta_label }}" {% if item.external %} target="_blank" rel="noreferrer" {% endif %}>
-              <img src="{{ item.image_src }}" alt="{{ item.image_alt }}" width="1600" height="900" loading="lazy"
+              aria-label="{{ item.name }} {{ item.cta_label|t(lang) }}" {% if item.external %} target="_blank" rel="noreferrer" {% endif %}>
+              <img src="{{ item.image_src }}" alt="{{ item.image_alt|t(lang) }}" width="1600" height="900" loading="lazy"
                 decoding="async" />
               <span class="orbit-card-name">{{ item.name }}</span>
               <span class="product-slide-caption"><em>Click</em></span>
@@ -205,14 +223,14 @@
         <div class="proof-story" data-reveal>
           <p class="eyebrow">{{ content.trust_proof.eyebrow }}</p>
           <h2 id="proof-title">{{ content.trust_proof.headline }}</h2>
-          <p>{{ content.trust_proof.lead }}</p>
+          <p>{{ content.trust_proof.lead|t(lang) }}</p>
 
           <div class="proof-timeline" aria-label="지크립토 신뢰 흐름">
             {% for item in content.trust_proof.milestones %}
             <article data-stagger>
               <span>{{ item.phase }}</span>
-              <h3>{{ item.title }}</h3>
-              <p>{{ item.body }}</p>
+              <h3>{{ item.title|t(lang) }}</h3>
+              <p>{{ item.body|t(lang) }}</p>
             </article>
             {% endfor %}
           </div>
@@ -222,8 +240,8 @@
           {% for item in content.trust_proof.proof_items %}
           <article class="proof-card {{ item.tone_class }}" data-stagger>
             <span class="proof-label">{{ item.label }}</span>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.detail }}</p>
+            <strong>{{ item.title|t(lang) }}</strong>
+            <p>{{ item.detail|t(lang) }}</p>
           </article>
           {% endfor %}
         </div>
@@ -234,43 +252,39 @@
       <div class="container cta-layout">
         <div>
           <p class="eyebrow">{{ content.final_cta.eyebrow }}</p>
-          <h2 id="cta-title">{{ content.final_cta.title }}</h2>
-          <p>{{ content.final_cta.body }}</p>
+          <h2 id="cta-title">{{ content.final_cta.title|t(lang) }}</h2>
+          <p>{{ content.final_cta.body|t(lang) }}</p>
           <div class="cta-actions" aria-label="다음 행동">
             <a class="btn btn-action" href="{{ content.final_cta.primary.href }}">
-              <span>{{ content.final_cta.primary.label }}</span>
+              <span>{{ content.final_cta.primary.label|t(lang) }}</span>
               <span class="btn-arrow" aria-hidden="true"></span>
             </a>
-            <a class="btn btn-ghost" href="{{ content.final_cta.secondary.href }}">{{ content.final_cta.secondary.label
-              }}</a>
-            <a class="cta-text-link" href="{{ content.final_cta.tertiary.href }}">{{ content.final_cta.tertiary.label
-              }}</a>
+            <a class="btn btn-ghost" href="{{ content.final_cta.secondary.href }}">{{ content.final_cta.secondary.label|t(lang) }}</a>
+            <a class="cta-text-link" href="{{ content.final_cta.tertiary.href }}">{{ content.final_cta.tertiary.label|t(lang) }}</a>
           </div>
         </div>
         <form class="contact-form" action="/contact#contact" method="post" aria-label="Contact form">
           <label>
-            <span>이메일</span>
+            <span>{{ content.contact_labels.email|t(lang) }}</span>
             <input type="email" name="email" placeholder="name@company.com" autocomplete="email"
               value="{{ contact.email }}" required />
           </label>
           <label>
-            <span>문의 내용</span>
-            <textarea name="message" rows="5" placeholder="적용 분야, 검증하려는 업무, 상담 희망 내용을 남겨주세요."
+            <span>{{ content.contact_labels.message|t(lang) }}</span>
+            <textarea name="message" rows="5" placeholder="{{ content.contact_labels.message_placeholder|t(lang) }}"
               required>{{ contact.message }}</textarea>
           </label>
           <label class="consent-field">
             <input type="checkbox" name="privacy" value="yes" required{% if contact.privacy_checked %} checked{% endif
               %} />
-            <span>답변을 위한 개인정보 수집·이용에 동의합니다.</span>
+            <span>{{ content.contact_labels.privacy|t(lang) }}</span>
           </label>
           <button class="btn btn-action" type="submit">
-            <span>문의하기</span>
+            <span>{{ content.contact_labels.submit|t(lang) }}</span>
             <span class="btn-arrow" aria-hidden="true"></span>
           </button>
           {% if contact.show_feedback %}
           <p class="form-note {{ contact.feedback_class }}">{{ contact.feedback_message }}</p>
-          {% else %}
-          <p class="form-note">{{ contact.feedback_message }}</p>
           {% endif %}
         </form>
       </div>
@@ -284,7 +298,7 @@
           <img class="brand-logo" src="{{ content.logo_src }}" alt="{{ content.logo_alt }}" width="300" height="56"
             loading="lazy" decoding="async" />
         </a>
-        <p>{{ content.footer_text }}</p>
+        <p>{{ content.footer_text|t(lang) }}</p>
         <p class="footer-note">{{ content.footer_note }}</p>
       </div>
       <div class="footer-links" aria-label="푸터 메뉴">

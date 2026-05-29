@@ -4,28 +4,28 @@
     <section class="product-landing-hero" id="top" aria-labelledby="product-title" data-reveal>
       <div class="container product-hero-grid">
         <div class="product-hero-copy">
-          <p class="eyebrow">{{ product.eyebrow }}</p>
-          <span class="product-name">{{ product.product_name }}</span>
-          <h1 id="product-title">{{ product.hero_title }}</h1>
-          <p class="product-lead">{{ product.hero_lead }}</p>
+          <p class="eyebrow">{{ product.eyebrow|t(lang) }}</p>
+          <span class="product-name">{{ product.product_name|t(lang) }}</span>
+          <h1 id="product-title">{{ product.hero_title|t(lang) }}</h1>
+          <p class="product-lead">{{ product.hero_lead|t(lang) }}</p>
           <p class="product-audience">Digital Asset Enterprise</p>
-          <p class="product-note">{{ product.hero_note }}</p>
-          <ul class="product-signal-list" aria-label="{{ product.product_name }} 핵심 정보">
+          <p class="product-note">{{ product.hero_note|t(lang) }}</p>
+          <ul class="product-signal-list" aria-label="{{ product.product_name|t(lang) }} 핵심 정보">
             {% for item in product.stats %}
             <li>
-              <span>{{ item.label }}</span>
-              <strong>{{ item.value }}</strong>
-              <small>{{ item.detail }}</small>
+              {% if item.label|t(lang) != "" %}<span>{{ item.label|t(lang) }}</span>{% endif %}
+              <strong>{{ item.value|t(lang) }}</strong>
+              <small>{{ item.detail|t(lang) }}</small>
             </li>
             {% endfor %}
           </ul>
           <div class="hero-cta" aria-label="제품 행동">
-            <a class="btn btn-primary" href="{{ product.primary_cta.href }}">{{ product.primary_cta.label }}</a>
-            <a class="btn btn-ghost" href="{{ product.secondary_cta.href }}">{{ product.secondary_cta.label }}</a>
+            <a class="btn btn-primary" href="{{ product.primary_cta.href }}">{{ product.primary_cta.label|t(lang) }}</a>
+            <a class="btn btn-ghost" href="{{ product.secondary_cta.href }}">{{ product.secondary_cta.label|t(lang) }}</a>
           </div>
         </div>
 
-        <div class="product-hero-visual" aria-label="{{ product.product_name }} 주요 지표">
+        <div class="product-hero-visual" aria-label="{{ product.product_name|t(lang) }} 주요 지표">
           <figure class="product-visual-card">
             <img src="/assets/zkporl-product-slide-1.png" alt="zkPoRL 제품 소개 비주얼" width="1600" height="900"
               decoding="async" />
@@ -38,27 +38,25 @@
       <div class="container" data-reveal>
         <div class="section-heading">
           <p class="eyebrow">Problem</p>
-          <h2 id="zkp-problem-title">{{ product.problem_title }}</h2>
-          <p>{{ product.problem_body }}</p>
+          <h2 id="zkp-problem-title">{{ product.problem_title|t(lang) }}</h2>
+          <p>{{ product.problem_body|t(lang) }}</p>
         </div>
 
         <div class="zkp-problem-callout" data-stagger>
-          <span class="zkp-problem-callout-badge">기존 방식의 한계</span>
-          <p class="zkp-problem-callout-body">점검 사이에 발생한 <mark>장부 불일치</mark>와 <mark>이상징후</mark>를 조기에 포착하기 어렵습니다.</p>
+          <span class="zkp-problem-callout-badge">{{ product.problem_callout_badge|t(lang) }}</span>
+          <p class="zkp-problem-callout-body">{{ product.problem_callout_body|t(lang) }}</p>
         </div>
 
         <div class="zkp-problem-cards">
           {% for item in product.problems %}
           <div class="zkp-problem-card" data-stagger>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.body }}</p>
+            <strong>{{ item.title|t(lang) }}</strong>
+            <p>{{ item.body|t(lang) }}</p>
           </div>
           {% endfor %}
         </div>
 
-        <p class="zkp-problem-summary" data-stagger>
-          문제는 <strong>"자산이 충분하다"</strong>만이 아니라, 운영 중 <strong>"변동성을 설명할 수 있느냐"</strong>입니다.
-        </p>
+        <p class="zkp-problem-summary" data-stagger>{{ product.problem_summary|t(lang) }}</p>
       </div>
     </section>
 
@@ -67,8 +65,8 @@
         <div class="container" data-reveal>
           <div class="zkp-why-header">
             <p class="zkp-why-eyebrow">ZKP VALUE</p>
-            <h2 class="zkp-why-title">왜 영지식증명인가</h2>
-            <p class="zkp-why-lead">투명성과 정보보호의 딜레마를 동시에 해결합니다.</p>
+            <h2 class="zkp-why-title">{{ product.why_title|t(lang) }}</h2>
+            <p class="zkp-why-lead">{{ product.why_lead|t(lang) }}</p>
           </div>
           <div class="zkp-venn">
             <svg class="venn-svg" viewBox="0 0 800 400" role="img" aria-label="영지식증명 가치 다이어그램" preserveAspectRatio="xMidYMid meet">
@@ -99,15 +97,15 @@
           <table class="zkp-compare-table">
             <thead>
               <tr>
-                <th>구분</th>
-                <th>일반 대사</th>
+                <th>{{ product.table_header1|t(lang) }}</th>
+                <th>{{ product.table_header2|t(lang) }}</th>
                 <th>zkPoRL</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>검증방식</td><td>원본 직접 대조</td><td>증명값 기반 검증</td></tr>
-              <tr><td>정보 노출</td><td>민감정보 노출 위험</td><td>민감정보 비공개</td></tr>
-              <tr><td>공시 신뢰</td><td>운영기관 발표 의존</td><td>수학적 검증 가능</td></tr>
+              <tr><td>{{ product.table_row1_label|t(lang) }}</td><td>{{ product.table_row1_traditional|t(lang) }}</td><td>{{ product.table_row1_new|t(lang) }}</td></tr>
+              <tr><td>{{ product.table_row2_label|t(lang) }}</td><td>{{ product.table_row2_traditional|t(lang) }}</td><td>{{ product.table_row2_new|t(lang) }}</td></tr>
+              <tr><td>{{ product.table_row3_label|t(lang) }}</td><td>{{ product.table_row3_traditional|t(lang) }}</td><td>{{ product.table_row3_new|t(lang) }}</td></tr>
             </tbody>
           </table>
         </div>
@@ -117,9 +115,9 @@
     <section class="section product-answer-section" aria-labelledby="answer-title">
       <div class="container product-answer-panel" data-reveal>
         <div class="section-copy">
-          <p class="eyebrow">제품이 하는 일</p>
-          <h2 id="answer-title">{{ product.answer_title }}</h2>
-          <p>{{ product.answer_body }}</p>
+          <p class="eyebrow">{{ product.answer_eyebrow|t(lang) }}</p>
+          <h2 id="answer-title">{{ product.answer_title|t(lang) }}</h2>
+          <p>{{ product.answer_body|t(lang) }}</p>
         </div>
         <div class="product-answer-content">
           <figure class="product-context-media">
@@ -129,8 +127,8 @@
           <div class="answer-card-grid">
             {% for item in product.answer_cards %}
             <article>
-              <h3>{{ item.title }}</h3>
-              <p>{{ item.body }}</p>
+              <h3>{{ item.title|t(lang) }}</h3>
+              <p>{{ item.body|t(lang) }}</p>
             </article>
             {% endfor %}
           </div>
@@ -142,8 +140,8 @@
       <div class="container" data-reveal>
         <div class="section-heading">
           <p class="eyebrow">Solution Flow</p>
-          <h2 id="zkps-title">zkPoRL Server 처리 흐름</h2>
-          <p>장부·지갑·온체인·감사증빙을 하나의 검증 흐름으로 연결합니다.</p>
+          <h2 id="zkps-title">{{ product.flow_section_title|t(lang) }}</h2>
+          <p>{{ product.flow_subtitle|t(lang) }}</p>
         </div>
 
         <div class="zkps-flow">
@@ -153,7 +151,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg>
               </span>
               <div class="zkps-card">
-                <strong>전산원장</strong>
+                <strong>{{ product.flow_in1_title|t(lang) }}</strong>
                 <span>ledger_change_event</span>
               </div>
             </div>
@@ -162,7 +160,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="13" rx="2.5"/><path d="M2.5 9.5h19"/><path d="M16.5 13.5h2"/></svg>
               </span>
               <div class="zkps-card">
-                <strong>지갑 잔고</strong>
+                <strong>{{ product.flow_in2_title|t(lang) }}</strong>
                 <span>wallet snapshot</span>
               </div>
             </div>
@@ -171,7 +169,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 4.5 5.5v6c0 4.5 3 8 7.5 10 4.5-2 7.5-5.5 7.5-10v-6Z"/></svg>
               </span>
               <div class="zkps-card">
-                <strong>온체인 데이터</strong>
+                <strong>{{ product.flow_in3_title|t(lang) }}</strong>
                 <span>chain event</span>
               </div>
             </div>
@@ -189,7 +187,7 @@
               <span class="zkps-ring">Submit</span>
               <span class="zkps-ring">Finalize</span>
             </div>
-            <p class="zkps-server-desc">정의된 입력과 검증 명제에 대해<br />계산 정합성을 확인합니다.</p>
+            <p class="zkps-server-desc">{{ product.flow_server_desc|t(lang) }}</p>
           </div>
 
           <div class="zkps-conn zkps-conn--out" aria-hidden="true">
@@ -199,8 +197,8 @@
           <div class="zkps-side zkps-side--out">
             <div class="zkps-node" data-stagger>
               <div class="zkps-card">
-                <strong>운영 대시보드</strong>
-                <span>상태·diff·alert</span>
+                <strong>{{ product.flow_out1_title|t(lang) }}</strong>
+                <span>{{ product.flow_out1_sub|t(lang) }}</span>
               </div>
               <span class="zkps-icon zkps-icon--out" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M7 9h10M7 13h7M7 17h4"/></svg>
@@ -208,8 +206,8 @@
             </div>
             <div class="zkps-node" data-stagger>
               <div class="zkps-card">
-                <strong>Case 관리</strong>
-                <span>증명 실패 원인 확인</span>
+                <strong>{{ product.flow_out2_title|t(lang) }}</strong>
+                <span>{{ product.flow_out2_sub|t(lang) }}</span>
               </div>
               <span class="zkps-icon zkps-icon--out" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg>
@@ -217,7 +215,7 @@
             </div>
             <div class="zkps-node" data-stagger>
               <div class="zkps-card">
-                <strong>감사·공시 자료</strong>
+                <strong>{{ product.flow_out3_title|t(lang) }}</strong>
                 <span>Evidence Bundle</span>
               </div>
               <span class="zkps-icon zkps-icon--out" aria-hidden="true">
@@ -227,23 +225,23 @@
           </div>
         </div>
 
-        <p class="zkps-note">zkPoRL은 원천 데이터를 생성하지 않습니다. <strong>정의된 데이터</strong>와 <strong>검증 명제</strong>에 대한 <strong>정합성을 확인</strong>합니다.</p>
+        <p class="zkps-note">{{ product.flow_note|t(lang) }}</p>
       </div>
     </section>
 
     <section class="section zkp-flow-section" aria-labelledby="workflow-title">
       <div class="container" data-reveal>
         <div class="section-heading">
-          <p class="eyebrow">업무 흐름</p>
-          <h2 id="workflow-title">{{ product.workflow_title }}</h2>
-          <p>{{ product.workflow_body }}</p>
+          <p class="eyebrow">{{ product.workflow_eyebrow|t(lang) }}</p>
+          <h2 id="workflow-title">{{ product.workflow_title|t(lang) }}</h2>
+          <p>{{ product.workflow_body|t(lang) }}</p>
         </div>
         <div class="zkp-flow-cards">
           {% for item in product.workflow %}
           <article class="zkp-flow-card" data-stagger>
             <span class="zkp-flow-num">{{ item.number }}</span>
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.body }}</p>
+            <h3>{{ item.title|t(lang) }}</h3>
+            <p>{{ item.body|t(lang) }}</p>
           </article>
           {% endfor %}
         </div>
@@ -253,15 +251,15 @@
     <section class="section zkp-proof-section" aria-labelledby="proof-title">
       <div class="container" data-reveal>
         <div class="section-heading">
-          <p class="eyebrow">확인 자료</p>
-          <h2 id="proof-title">{{ product.proof_title }}</h2>
-          <p>{{ product.proof_body }}</p>
+          <p class="eyebrow">{{ product.proof_eyebrow|t(lang) }}</p>
+          <h2 id="proof-title">{{ product.proof_title|t(lang) }}</h2>
+          <p>{{ product.proof_body|t(lang) }}</p>
         </div>
         <div class="zkp-proof-cards">
           {% for item in product.proof_points %}
           <article class="zkp-proof-card" data-stagger>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.body }}</p>
+            <strong>{{ item.title|t(lang) }}</strong>
+            <p>{{ item.body|t(lang) }}</p>
           </article>
           {% endfor %}
         </div>
@@ -271,22 +269,22 @@
     <section class="final-cta product-final-cta" id="contact" aria-labelledby="product-cta-title" data-reveal>
       <div class="container cta-layout product-cta-layout">
         <div>
-          <p class="eyebrow">다음 단계</p>
-          <h2 id="product-cta-title">{{ product.cta_title }}</h2>
-          <p>{{ product.cta_body }}</p>
+          <p class="eyebrow">{{ product.cta_eyebrow|t(lang) }}</p>
+          <h2 id="product-cta-title">{{ product.cta_title|t(lang) }}</h2>
+          <p>{{ product.cta_body|t(lang) }}</p>
           <div class="cta-actions" aria-label="다음 행동">
             <a class="btn btn-action" href="{{ product.primary_cta.href }}">
-              <span>{{ product.primary_cta.label }}</span>
+              <span>{{ product.primary_cta.label|t(lang) }}</span>
               <span class="btn-arrow" aria-hidden="true"></span>
             </a>
-            <a class="btn btn-ghost" href="{{ product.secondary_cta.href }}">{{ product.secondary_cta.label }}</a>
+            <a class="btn btn-ghost" href="{{ product.secondary_cta.href }}">{{ product.secondary_cta.label|t(lang) }}</a>
           </div>
         </div>
         <div class="product-related-card">
-          <span>함께 검토할 제품</span>
-          <h3>zkWallet</h3>
-          <p>기관용 지갑 생성, 수탁 입출금, 발행·소각 승인 흐름도 함께 검토할 수 있습니다.</p>
-          <a href="/products/zkwallet">zkWallet 보기</a>
+          <span>{{ product.related_label|t(lang) }}</span>
+          <h3>{{ product.related_name }}</h3>
+          <p>{{ product.related_body|t(lang) }}</p>
+          <a href="{{ product.related_href }}">{{ product.related_link_label|t(lang) }}</a>
         </div>
       </div>
     </section>

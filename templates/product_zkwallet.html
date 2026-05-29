@@ -4,28 +4,28 @@
     <section class="product-landing-hero" id="top" aria-labelledby="product-title" data-reveal>
       <div class="container product-hero-grid">
         <div class="product-hero-copy">
-          <p class="eyebrow">{{ product.eyebrow }}</p>
-          <span class="product-name">{{ product.product_name }}</span>
-          <h1 id="product-title">{{ product.hero_title }}</h1>
-          <p class="product-lead">{{ product.hero_lead }}</p>
+          <p class="eyebrow">{{ product.eyebrow|t(lang) }}</p>
+          <span class="product-name">{{ product.product_name|t(lang) }}</span>
+          <h1 id="product-title">{{ product.hero_title|t(lang) }}</h1>
+          <p class="product-lead">{{ product.hero_lead|t(lang) }}</p>
           <p class="product-audience">Digital Asset Enterprise</p>
-          <p class="product-note">{{ product.hero_note }}</p>
-          <ul class="product-signal-list" aria-label="{{ product.product_name }} 핵심 정보">
+          <p class="product-note">{{ product.hero_note|t(lang) }}</p>
+          <ul class="product-signal-list" aria-label="{{ product.product_name|t(lang) }} 핵심 정보">
             {% for item in product.stats %}
             <li>
-              <span>{{ item.label }}</span>
-              <strong>{{ item.value }}</strong>
-              <small>{{ item.detail }}</small>
+              {% if item.label|t(lang) != "" %}<span>{{ item.label|t(lang) }}</span>{% endif %}
+              <strong>{{ item.value|t(lang) }}</strong>
+              <small>{{ item.detail|t(lang) }}</small>
             </li>
             {% endfor %}
           </ul>
           <div class="hero-cta" aria-label="제품 행동">
-            <a class="btn btn-primary" href="{{ product.primary_cta.href }}">{{ product.primary_cta.label }}</a>
-            <a class="btn btn-ghost" href="{{ product.secondary_cta.href }}">{{ product.secondary_cta.label }}</a>
+            <a class="btn btn-primary" href="{{ product.primary_cta.href }}">{{ product.primary_cta.label|t(lang) }}</a>
+            <a class="btn btn-ghost" href="{{ product.secondary_cta.href }}">{{ product.secondary_cta.label|t(lang) }}</a>
           </div>
         </div>
 
-        <div class="product-hero-visual" aria-label="{{ product.product_name }} 주요 지표">
+        <div class="product-hero-visual" aria-label="{{ product.product_name|t(lang) }} 주요 지표">
           <figure class="product-visual-card">
             <img src="/assets/zkwallet-product-slide-1.png" alt="zkWallet 발행사 지갑 생성 데모 화면" width="2788" height="1378"
               decoding="async" />
@@ -38,22 +38,20 @@
       <div class="container" data-reveal>
         <div class="section-heading">
           <p class="eyebrow">Problem</p>
-          <h2 id="zkw-problem-title">{{ product.problem_title }}</h2>
-          <p>{{ product.problem_body }}</p>
+          <h2 id="zkw-problem-title">{{ product.problem_title|t(lang) }}</h2>
+          <p>{{ product.problem_body|t(lang) }}</p>
         </div>
 
         <div class="zkp-problem-cards">
           {% for item in product.problems %}
           <div class="zkp-problem-card" data-stagger>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.body }}</p>
+            <strong>{{ item.title|t(lang) }}</strong>
+            <p>{{ item.body|t(lang) }}</p>
           </div>
           {% endfor %}
         </div>
 
-        <p class="zkp-problem-summary" data-stagger>
-          문제는 키를 <strong>어떻게 보관하느냐</strong>가 아니라, <strong>키를 한 곳에 모으지 않는 것</strong>입니다.
-        </p>
+        <p class="zkp-problem-summary" data-stagger>{{ product.problem_summary|t(lang) }}</p>
       </div>
     </section>
 
@@ -61,17 +59,17 @@
       <div class="container" data-reveal>
         <div class="section-heading">
           <p class="eyebrow">Why MPC</p>
-          <h2 id="zkw-why-title">왜 MPC인가</h2>
-          <p>개인키를 한 곳에 모으지 않아 단일 키 유출 위험을 없앱니다.</p>
+          <h2 id="zkw-why-title">{{ product.why_title|t(lang) }}</h2>
+          <p>{{ product.why_lead|t(lang) }}</p>
         </div>
         <div class="zkw-compare">
           <div class="zkw-panel zkw-panel--as" data-stagger>
             <span class="zkw-panel-tag">AS-IS</span>
-            <h3>단일 마스터 시드</h3>
+            <h3>{{ product.mpc_asis_title|t(lang) }}</h3>
             <ul>
-              <li>키를 한 곳에 집중 보관합니다.</li>
-              <li>단일 유출 시 전체 자산이 탈취됩니다.</li>
-              <li>키 원본이 복원될 수 있습니다.</li>
+              <li>{{ product.mpc_asis_item1|t(lang) }}</li>
+              <li>{{ product.mpc_asis_item2|t(lang) }}</li>
+              <li>{{ product.mpc_asis_item3|t(lang) }}</li>
             </ul>
           </div>
           <div class="zkw-compare-arrow" aria-hidden="true">
@@ -79,11 +77,11 @@
           </div>
           <div class="zkw-panel zkw-panel--to" data-stagger>
             <span class="zkw-panel-tag">TO-BE</span>
-            <h3>MPC 분산 키</h3>
+            <h3>{{ product.mpc_tobe_title|t(lang) }}</h3>
             <ul>
-              <li>개인키를 여러 조각으로 나눠 분산 보관합니다.</li>
-              <li>(t/n) 임계치 기반으로 공동 서명합니다.</li>
-              <li>어떤 경우에도 키 원본이 복원되지 않습니다.</li>
+              <li>{{ product.mpc_tobe_item1|t(lang) }}</li>
+              <li>{{ product.mpc_tobe_item2|t(lang) }}</li>
+              <li>{{ product.mpc_tobe_item3|t(lang) }}</li>
             </ul>
           </div>
         </div>
@@ -93,9 +91,9 @@
     <section class="section product-answer-section" aria-labelledby="answer-title">
       <div class="container product-answer-panel" data-reveal>
         <div class="section-copy">
-          <p class="eyebrow">제품이 하는 일</p>
-          <h2 id="answer-title">{{ product.answer_title }}</h2>
-          <p>{{ product.answer_body }}</p>
+          <p class="eyebrow">{{ product.answer_eyebrow|t(lang) }}</p>
+          <h2 id="answer-title">{{ product.answer_title|t(lang) }}</h2>
+          <p>{{ product.answer_body|t(lang) }}</p>
         </div>
         <div class="product-answer-content">
           <figure class="product-context-media">
@@ -105,8 +103,8 @@
           <div class="answer-card-grid">
             {% for item in product.answer_cards %}
             <article>
-              <h3>{{ item.title }}</h3>
-              <p>{{ item.body }}</p>
+              <h3>{{ item.title|t(lang) }}</h3>
+              <p>{{ item.body|t(lang) }}</p>
             </article>
             {% endfor %}
           </div>
@@ -118,25 +116,25 @@
       <div class="container" data-reveal>
         <div class="section-heading">
           <p class="eyebrow">MPC Signing</p>
-          <h2 id="zkw-mpc-title">정책을 통과한 거래만 공동 서명합니다</h2>
-          <p>키 조각 A·B·C가 각각 부분 서명을 만들고, Manager가 이를 결합해 최종 서명을 생성합니다.</p>
+          <h2 id="zkw-mpc-title">{{ product.mpc_section_title|t(lang) }}</h2>
+          <p>{{ product.mpc_section_lead|t(lang) }}</p>
         </div>
         <div class="zkw-mpc-card" data-stagger>
           <div class="zkw-mpc-nodes">
             <div class="zkw-node">
               <strong>Party Node A</strong>
-              <span>키 조각 A</span>
-              <em>부분 서명</em>
+              <span>{{ product.mpc_shard_label|t(lang) }} A</span>
+              <em>{{ product.mpc_partial_sig|t(lang) }}</em>
             </div>
             <div class="zkw-node">
               <strong>Party Node B</strong>
-              <span>키 조각 B</span>
-              <em>부분 서명</em>
+              <span>{{ product.mpc_shard_label|t(lang) }} B</span>
+              <em>{{ product.mpc_partial_sig|t(lang) }}</em>
             </div>
             <div class="zkw-node">
               <strong>Party Node C</strong>
-              <span>키 조각 C</span>
-              <em>부분 서명</em>
+              <span>{{ product.mpc_shard_label|t(lang) }} C</span>
+              <em>{{ product.mpc_partial_sig|t(lang) }}</em>
             </div>
           </div>
           <div class="zkw-merge" aria-hidden="true">
@@ -144,15 +142,15 @@
           </div>
           <div class="zkw-manager">
             <strong>Manager</strong>
-            <span>부분 서명 수집 · 결합</span>
+            <span>{{ product.mpc_collect_label|t(lang) }}</span>
           </div>
           <div class="zkw-mpc-tail">
             <span class="zkw-arrow" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
             </span>
-            <span class="zkw-sig">Full Signature → 블록체인 전송</span>
+            <span class="zkw-sig">Full Signature → {{ product.mpc_chain_label|t(lang) }}</span>
           </div>
-          <p class="zkw-mpc-note">거래 서명 요청은 <strong>정책 검증</strong> 후에만 진행되며, 키 원본을 모으지 않고 <strong>부분 서명의 결합</strong>으로 완성됩니다.</p>
+          <p class="zkw-mpc-note">{{ product.mpc_note|t(lang) }}</p>
         </div>
       </div>
     </section>
@@ -160,15 +158,15 @@
     <section class="section zkp-proof-section" aria-labelledby="proof-title">
       <div class="container" data-reveal>
         <div class="section-heading">
-          <p class="eyebrow">확인 자료</p>
-          <h2 id="proof-title">{{ product.proof_title }}</h2>
-          <p>{{ product.proof_body }}</p>
+          <p class="eyebrow">{{ product.proof_eyebrow|t(lang) }}</p>
+          <h2 id="proof-title">{{ product.proof_title|t(lang) }}</h2>
+          <p>{{ product.proof_body|t(lang) }}</p>
         </div>
         <div class="zkp-proof-cards">
           {% for item in product.proof_points %}
           <article class="zkp-proof-card" data-stagger>
-            <strong>{{ item.title }}</strong>
-            <p>{{ item.body }}</p>
+            <strong>{{ item.title|t(lang) }}</strong>
+            <p>{{ item.body|t(lang) }}</p>
           </article>
           {% endfor %}
         </div>
@@ -178,22 +176,22 @@
     <section class="final-cta product-final-cta" id="contact" aria-labelledby="product-cta-title" data-reveal>
       <div class="container cta-layout product-cta-layout">
         <div>
-          <p class="eyebrow">다음 단계</p>
-          <h2 id="product-cta-title">{{ product.cta_title }}</h2>
-          <p>{{ product.cta_body }}</p>
+          <p class="eyebrow">{{ product.cta_eyebrow|t(lang) }}</p>
+          <h2 id="product-cta-title">{{ product.cta_title|t(lang) }}</h2>
+          <p>{{ product.cta_body|t(lang) }}</p>
           <div class="cta-actions" aria-label="다음 행동">
             <a class="btn btn-action" href="{{ product.primary_cta.href }}">
-              <span>{{ product.primary_cta.label }}</span>
+              <span>{{ product.primary_cta.label|t(lang) }}</span>
               <span class="btn-arrow" aria-hidden="true"></span>
             </a>
-            <a class="btn btn-ghost" href="{{ product.secondary_cta.href }}">{{ product.secondary_cta.label }}</a>
+            <a class="btn btn-ghost" href="{{ product.secondary_cta.href }}">{{ product.secondary_cta.label|t(lang) }}</a>
           </div>
         </div>
         <div class="product-related-card">
-          <span>함께 검토할 제품</span>
-          <h3>zkPoRL</h3>
-          <p>고객부채 상시 대사와 준비자산 검증 로드맵도 함께 검토할 수 있습니다.</p>
-          <a href="/products/zkporl">zkPoRL 보기</a>
+          <span>{{ product.related_label|t(lang) }}</span>
+          <h3>{{ product.related_name }}</h3>
+          <p>{{ product.related_body|t(lang) }}</p>
+          <a href="{{ product.related_href }}">{{ product.related_link_label|t(lang) }}</a>
         </div>
       </div>
     </section>
